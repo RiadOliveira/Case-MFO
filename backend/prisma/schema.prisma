@@ -118,5 +118,21 @@ model Simulation {
   clientId String
   client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
 
+  events SimulationEvent[]
+
   @@map("simulations")
+}
+
+model SimulationEvent {
+  id   String    @id @default(uuid())
+  type EventType
+
+  value     Decimal
+  frequency EventFrequency
+  date      DateTime
+
+  simulationId String
+  simulation   Simulation @relation(fields: [simulationId], references: [id], onDelete: Cascade)
+
+  @@map("simulation_events")
 }
