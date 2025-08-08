@@ -7,3 +7,116 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum ClientStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum GoalType {
+  RETIREMENT
+  SHORT_TERM
+  MEDIUM_TERM
+}
+
+enum EventFrequency {
+  ONCE
+  MONTHLY
+  ANNUAL
+}
+
+enum EventType {
+  DEPOSIT
+  WITHDRAWAL
+  INSURANCE_PREMIUM
+  DIVIDEND
+  SALARY
+  EXPENSE
+}
+
+model Client {
+  id     String       @id @default(uuid())
+  name   String
+  email  String       @unique
+  age    Int
+  status ClientStatus @default(ACTIVE)
+
+  familyProfile String?
+  totalWealth   Decimal @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  goals       Goal[]
+  wallet      Wallet[]
+  events      Event[]
+  simulations Simulation[]
+
+  @@map("clients")
+}
+
+model Goal {
+  id   String   @id @default(uuid())
+  name String
+  type GoalType
+
+  targetValue Decimal
+  targetDate  DateTime
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@map("goals")
+}
+
+model Wallet {
+  id         String  @id @default(uuid())
+  assetClass String
+  percentage Decimal
+  value      Decimal
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@map("wallet")
+}
+
+model Event {
+  id   String    @id @default(uuid())
+  type EventType
+
+  value       Decimal
+  frequency   EventFrequency
+  date        DateTime
+  description String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@map("events")
+}
+
+model Simulation {
+  id   String  @id @default(uuid())
+  name String?
+
+  initialWealth  Decimal
+  projectionRate Decimal @default(0.04)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@map("simulations")
+}
