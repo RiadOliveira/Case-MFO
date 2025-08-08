@@ -4,7 +4,10 @@ export default {
   testMatch: ['**/*.test.ts'],
   clearMocks: true,
   collectCoverage: true,
-  collectCoverageFrom: ['<rootDir>/src/services/*.ts'],
+  collectCoverageFrom: [
+    '<rootDir>/src/services/*.ts',
+    '<rootDir>/src/controllers/*.ts',
+  ],
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
   coverageReporters: ['text-summary', 'lcov'],
