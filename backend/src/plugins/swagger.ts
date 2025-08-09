@@ -13,7 +13,6 @@ export const swaggerPlugin: FastifyPluginAsync = fp(async (app) => {
         description: 'Documentação da API Case MFO',
         version: '1.0.0',
       },
-      tags: [{ name: 'Test', description: 'Rotas de teste' }],
     },
     transform: jsonSchemaTransform,
   });

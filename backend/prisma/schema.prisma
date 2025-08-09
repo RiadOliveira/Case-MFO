@@ -42,7 +42,7 @@ model Client {
   status ClientStatus @default(ACTIVE)
 
   familyProfile String?
-  totalWealth   Decimal @default(0)
+  totalWealth   Decimal @default(0) @db.Decimal(10, 4)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -60,7 +60,7 @@ model Goal {
   name String
   type GoalType
 
-  targetValue Decimal
+  targetValue Decimal  @db.Decimal(10, 4)
   targetDate  DateTime
 
   createdAt DateTime @default(now())
@@ -75,8 +75,8 @@ model Goal {
 model Wallet {
   id         String  @id @default(uuid())
   assetClass String
-  percentage Decimal
-  value      Decimal
+  percentage Decimal @db.Decimal(10, 4)
+  value      Decimal @db.Decimal(10, 4)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -91,7 +91,7 @@ model Event {
   id   String    @id @default(uuid())
   type EventType
 
-  value       Decimal
+  value       Decimal        @db.Decimal(10, 4)
   frequency   EventFrequency
   date        DateTime
   description String?
@@ -109,8 +109,8 @@ model Simulation {
   id   String  @id @default(uuid())
   name String?
 
-  initialWealth  Decimal
-  projectionRate Decimal @default(0.04)
+  initialWealth  Decimal @db.Decimal(10, 4)
+  projectionRate Decimal @default(0.04) @db.Decimal(10, 4)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -127,7 +127,7 @@ model SimulationEvent {
   id   String    @id @default(uuid())
   type EventType
 
-  value     Decimal
+  value     Decimal        @db.Decimal(10, 4)
   frequency EventFrequency
   date      DateTime
 

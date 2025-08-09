@@ -10,8 +10,16 @@ import { jwtPlugin } from './plugins/jwt.ts';
 import { swaggerPlugin } from './plugins/swagger.ts';
 import { routes } from './routes/index.ts';
 
-export async function build() {
-  const app = fastify();
+const LOGGER_CONFIG = {
+  logger: {
+    transport: {
+      target: 'pino-pretty',
+    },
+  },
+} as const;
+
+export async function build(logger = false) {
+  const app = fastify(logger ? LOGGER_CONFIG : undefined);
 
   app.setValidatorCompiler(validatorCompiler);
   app.setSerializerCompiler(serializerCompiler);

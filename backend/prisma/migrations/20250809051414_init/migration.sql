@@ -18,7 +18,7 @@ CREATE TABLE "public"."clients" (
     "age" INTEGER NOT NULL,
     "status" "public"."ClientStatus" NOT NULL DEFAULT 'ACTIVE',
     "familyProfile" TEXT,
-    "totalWealth" DECIMAL(65,30) NOT NULL DEFAULT 0,
+    "totalWealth" DECIMAL(10,4) NOT NULL DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -30,7 +30,7 @@ CREATE TABLE "public"."goals" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "type" "public"."GoalType" NOT NULL,
-    "targetValue" DECIMAL(65,30) NOT NULL,
+    "targetValue" DECIMAL(10,4) NOT NULL,
     "targetDate" TIMESTAMP(3) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -43,8 +43,8 @@ CREATE TABLE "public"."goals" (
 CREATE TABLE "public"."wallet" (
     "id" TEXT NOT NULL,
     "assetClass" TEXT NOT NULL,
-    "percentage" DECIMAL(65,30) NOT NULL,
-    "value" DECIMAL(65,30) NOT NULL,
+    "percentage" DECIMAL(10,4) NOT NULL,
+    "value" DECIMAL(10,4) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "clientId" TEXT NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE "public"."wallet" (
 CREATE TABLE "public"."events" (
     "id" TEXT NOT NULL,
     "type" "public"."EventType" NOT NULL,
-    "value" DECIMAL(65,30) NOT NULL,
+    "value" DECIMAL(10,4) NOT NULL,
     "frequency" "public"."EventFrequency" NOT NULL,
     "date" TIMESTAMP(3) NOT NULL,
     "description" TEXT,
@@ -71,8 +71,8 @@ CREATE TABLE "public"."events" (
 CREATE TABLE "public"."simulations" (
     "id" TEXT NOT NULL,
     "name" TEXT,
-    "initialWealth" DECIMAL(65,30) NOT NULL,
-    "projectionRate" DECIMAL(65,30) NOT NULL DEFAULT 0.04,
+    "initialWealth" DECIMAL(10,4) NOT NULL,
+    "projectionRate" DECIMAL(10,4) NOT NULL DEFAULT 0.04,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "clientId" TEXT NOT NULL,

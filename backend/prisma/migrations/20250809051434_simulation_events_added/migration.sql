@@ -2,7 +2,7 @@
 CREATE TABLE "public"."simulation_events" (
     "id" TEXT NOT NULL,
     "type" "public"."EventType" NOT NULL,
-    "value" DECIMAL(65,30) NOT NULL,
+    "value" DECIMAL(10,4) NOT NULL,
     "frequency" "public"."EventFrequency" NOT NULL,
     "date" TIMESTAMP(3) NOT NULL,
     "simulationId" TEXT NOT NULL,

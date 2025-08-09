@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ClientStatus } from '../generated/prisma/index.js';
+import { ClientStatus, Prisma } from '../generated/prisma/index.js';
 
 const ClientStatusEnum = z.enum(Object.values(ClientStatus));
 
@@ -37,9 +37,9 @@ export const CLIENT_SCHEMAS = {
           age: z.number(),
           status: ClientStatusEnum,
           familyProfile: z.string().nullable(),
-          totalWealth: z.number(),
-          createdAt: z.string(),
-          updatedAt: z.string(),
+          totalWealth: z.instanceof(Prisma.Decimal),
+          createdAt: z.date(),
+          updatedAt: z.date(),
         }),
         409: z.object({
           error: z.string(),
@@ -63,9 +63,9 @@ export const CLIENT_SCHEMAS = {
             age: z.number(),
             status: ClientStatusEnum,
             familyProfile: z.string().nullable(),
-            totalWealth: z.number(),
-            createdAt: z.string(),
-            updatedAt: z.string(),
+            totalWealth: z.instanceof(Prisma.Decimal),
+            createdAt: z.date(),
+            updatedAt: z.date(),
           }),
         ),
       },
@@ -86,9 +86,9 @@ export const CLIENT_SCHEMAS = {
           age: z.number(),
           status: ClientStatusEnum,
           familyProfile: z.string().nullable(),
-          totalWealth: z.number(),
-          createdAt: z.string(),
-          updatedAt: z.string(),
+          totalWealth: z.instanceof(Prisma.Decimal),
+          createdAt: z.date(),
+          updatedAt: z.date(),
           goals: z.array(
             z.object({
               id: z.string(),
@@ -122,7 +122,7 @@ export const CLIENT_SCHEMAS = {
               name: z.string().nullable(),
               initialWealth: z.number(),
               projectionRate: z.number(),
-              createdAt: z.string(),
+              createdAt: z.date(),
             }),
           ),
         }),
@@ -173,9 +173,9 @@ export const CLIENT_SCHEMAS = {
           age: z.number(),
           status: ClientStatusEnum,
           familyProfile: z.string().nullable(),
-          totalWealth: z.number(),
-          createdAt: z.string(),
-          updatedAt: z.string(),
+          totalWealth: z.instanceof(Prisma.Decimal),
+          createdAt: z.date(),
+          updatedAt: z.date(),
         }),
         404: z.object({
           error: z.string(),
@@ -194,7 +194,7 @@ export const CLIENT_SCHEMAS = {
         id: z.uuid('ID deve ser um UUID válido'),
       }),
       response: {
-        204: z.object({}),
+        204: z.null(),
         404: z.object({
           error: z.string(),
         }),

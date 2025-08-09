@@ -1,6 +1,6 @@
 import { build } from './app.ts';
 
-const app = await build();
+const app = await build(true);
 
 try {
   await app.listen({ port: 3000, host: '0.0.0.0' });
