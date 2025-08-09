@@ -1,10 +1,13 @@
-import type { FastifyInstance } from 'fastify';
 import { ClientController } from '../controllers/client.controller.ts';
 import { ClientService } from '../services/client.service.ts';
 import { CLIENT_SCHEMAS } from '../schemas/client.schemas.ts';
 
+import type { FastifyInstance } from 'fastify';
+
 export async function clientRoutes(app: FastifyInstance) {
-  const controller = new ClientController(new ClientService(app.prisma));
+  const controller = new ClientController(
+    new ClientService(app.httpErrors, app.prisma),
+  );
 
   app.post('', CLIENT_SCHEMAS.create, controller.create);
   app.get('', CLIENT_SCHEMAS.getAll, controller.getAll);
