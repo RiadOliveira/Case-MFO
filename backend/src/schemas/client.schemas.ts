@@ -53,33 +53,21 @@ export const CLIENT_SCHEMAS = {
   getAll: {
     schema: {
       tags: ['Clients'],
-      summary: 'Get paginated list of clients',
-      querystring: z.object({
-        page: z.string().regex(/^\d+$/).transform(Number).optional(),
-        limit: z.string().regex(/^\d+$/).transform(Number).optional(),
-        status: ClientStatusEnum.optional(),
-        search: z.string().optional(),
-      }),
+      summary: 'Get all clients',
       response: {
-        200: z.object({
-          clients: z.array(
-            z.object({
-              id: z.string(),
-              name: z.string(),
-              email: z.string(),
-              age: z.number(),
-              status: ClientStatusEnum,
-              familyProfile: z.string().nullable(),
-              totalWealth: z.number(),
-              createdAt: z.string(),
-              updatedAt: z.string(),
-            }),
-          ),
-          total: z.number(),
-          page: z.number(),
-          limit: z.number(),
-          totalPages: z.number(),
-        }),
+        200: z.array(
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            email: z.string(),
+            age: z.number(),
+            status: ClientStatusEnum,
+            familyProfile: z.string().nullable(),
+            totalWealth: z.number(),
+            createdAt: z.string(),
+            updatedAt: z.string(),
+          }),
+        ),
       },
     },
   },

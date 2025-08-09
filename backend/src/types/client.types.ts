@@ -17,8 +17,3 @@ export type UpdateClientData = {
   familyProfile?: string;
   totalWealth?: number;
 };
-
-export type GetClientsParams = {
-  status?: ClientStatus;
-  search?: string;
-};
